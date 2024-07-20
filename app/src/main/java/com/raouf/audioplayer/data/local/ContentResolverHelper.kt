@@ -78,8 +78,6 @@ class ContentResolverHelper @Inject constructor(
                 }
             }
         }
-
-
      return audiolist
     }
 

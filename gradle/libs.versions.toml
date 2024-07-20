@@ -12,9 +12,10 @@ legacySupportV4 = "1.0.0"
 lifecycleRuntimeKtx = "2.8.3"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
-media3DatasourceOkhttp = "1.3.1"
+media3DatasourceOkhttp = "1.1.0"
 xaccompanistPermissions_z = " 0.30.0"
 xglide_z = " 4.15.1"
+media3Session = "1.3.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -43,6 +44,7 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 xaccompanist-permissions_z = { module = "com.google.accompanist : accompanist-permissions ", version.ref = "xaccompanistPermissions_z" }
 xglide_z = { module = "com.github.bumptech.glide : glide ", version.ref = "xglide_z" }
+androidx-media3-session = { group = "androidx.media3", name = "media3-session", version.ref = "media3Session" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
