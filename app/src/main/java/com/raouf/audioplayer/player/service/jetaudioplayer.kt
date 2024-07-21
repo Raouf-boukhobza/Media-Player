@@ -8,8 +8,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class Jetaudioplayer : MediaSessionService() {
-
+class Jetaudioplayer : MediaSessionService(){
     @Inject
     lateinit var mediaSession: MediaSession
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession = mediaSession
@@ -24,9 +23,6 @@ class Jetaudioplayer : MediaSessionService() {
             }
         }
     }
-
-
-
 }
 
 

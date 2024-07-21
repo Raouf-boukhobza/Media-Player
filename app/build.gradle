@@ -85,7 +85,8 @@ dependencies {
     implementation(libs.androidx.media3.session)
 
     //Glide
-    implementation libs.xglide.z
-    implementation libs.xaccompanist.permissions.z
+    implementation libs.glide
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
+    implementation(libs.accompanist.z.xaccompanist.permissions.z)
 
 }

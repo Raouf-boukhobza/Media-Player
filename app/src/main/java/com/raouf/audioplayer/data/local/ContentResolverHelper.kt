@@ -32,7 +32,7 @@ class ContentResolverHelper @Inject constructor(
     }
 
 
-    fun getcursordata() : MutableList<Audio>{
+    private fun getcursordata() : MutableList<Audio>{
         var audiolist = mutableListOf<Audio>()
           mCursor = context.contentResolver.query(
               MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
