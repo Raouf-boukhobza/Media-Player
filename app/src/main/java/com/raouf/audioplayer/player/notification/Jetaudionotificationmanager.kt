@@ -1,6 +1,7 @@
 package com.raouf.audioplayer.player.notification
 
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -31,11 +32,19 @@ class Jetaudionotificationmanager @Inject constructor(
         createnotificationchannel()
     }
 
+
     private fun Startnotificationservice(
         mediaSessionService: MediaSessionService,
         mediaSession: MediaSession
     ){
         buildnotification(mediaSession)
+    }
+
+    private fun forgroundsesrvicemanager(mediasessionservice : MediaSessionService){
+        val notification = Notification.Builder(context , Notification_Channel_id)
+            .setCategory(Notification.CATEGORY_SERVICE)
+            .build()
+            mediasessionservice.startForeground(Notification_Id,notification)
     }
 
     @OptIn(androidx.media3.common.util.UnstableApi::class)
