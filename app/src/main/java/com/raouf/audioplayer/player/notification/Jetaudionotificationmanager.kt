@@ -33,11 +33,12 @@ class Jetaudionotificationmanager @Inject constructor(
     }
 
 
-    private fun Startnotificationservice(
+     fun Startnotificationservice(
         mediaSessionService: MediaSessionService,
         mediaSession: MediaSession
     ){
         buildnotification(mediaSession)
+        forgroundsesrvicemanager(mediaSessionService)
     }
 
     private fun forgroundsesrvicemanager(mediasessionservice : MediaSessionService){
@@ -48,7 +49,7 @@ class Jetaudionotificationmanager @Inject constructor(
     }
 
     @OptIn(androidx.media3.common.util.UnstableApi::class)
-    private fun buildnotification(mediaSession: androidx.media3.session.MediaSession){
+    private fun buildnotification(mediaSession: MediaSession){
         mediaSession.sessionActivity?.let {
             JetAudioNotificationAdapter(
                 context = context,

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.4.0"
+agp = "8.4.2"
 glide = "4.15.1"
 hiltAndroid = "2.51.1"
 hiltCompiler = "1.2.0"
@@ -12,16 +12,13 @@ espressoCore = "3.6.1"
 legacySupportV4 = "1.0.0"
 lifecycleRuntimeKtx = "2.8.3"
 activityCompose = "1.9.0"
-composeBom = "2023.08.00"
+composeBom = "2024.06.00"
 media3DatasourceOkhttp = "1.1.0"
-xaccompanistPermissions_z = " 0.30.0"
-xaccompanistPermissions_zVersion = " 0.30.0"
-xglide_z = " 4.15.1"
 media3Session = "1.1.0"
 xglide_zVersion = " 4.15.1"
 
 [libraries]
-accompanist_z-xaccompanist-permissions_z = { module = "com.google.accompanist : accompanist-permissions ", version.ref = "xaccompanistPermissions_zVersion" }
+accompanist_z-xaccompanist-permissions_z = { module = "com.google.accompanist : accompanist-permissions ", version = "0.30.0" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltCompiler" }
 androidx-hilt-lifecycle-viewmodel = { module = "androidx.hilt:hilt-lifecycle-viewmodel", version.ref = "hiltLifecycleViewmodel" }
@@ -48,8 +45,6 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
-xaccompanist-permissions_z = { module = "com.google.accompanist : accompanist-permissions ", version.ref = "xaccompanistPermissions_z" }
-xglide_z = { module = "com.github.bumptech.glide : glide ", version.ref = "xglide_z" }
 androidx-media3-session = { group = "androidx.media3", name = "media3-session", version.ref = "media3Session" }
 
 [plugins]
