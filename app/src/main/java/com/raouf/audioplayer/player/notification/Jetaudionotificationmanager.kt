@@ -42,7 +42,7 @@ class Jetaudionotificationmanager @Inject constructor(
     }
 
     private fun forgroundsesrvicemanager(mediasessionservice : MediaSessionService){
-        val notification = Notification.Builder(context , Notification_Channel_id)
+        var notification = Notification.Builder(context , Notification_Channel_id)
             .setCategory(Notification.CATEGORY_SERVICE)
             .build()
             mediasessionservice.startForeground(Notification_Id,notification)

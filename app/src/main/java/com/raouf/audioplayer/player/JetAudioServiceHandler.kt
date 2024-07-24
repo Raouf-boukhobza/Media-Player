@@ -3,22 +3,45 @@ package com.raouf.audioplayer.player
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class JetAudioServiceHandler @Inject constructor(
   private val exoPlayer: ExoPlayer
-) : Player.Listener{
+) : Player.Listener {
    private val _audioState : MutableStateFlow<JetAudioState> =
        MutableStateFlow(JetAudioState.Initial)
     val audioState : StateFlow<JetAudioState> = _audioState.asStateFlow()
 
     private var job : Job? = null
+    override fun onPlaybackStateChanged(playbackState: Int){
+        when(playbackState){
+            ExoPlayer.STATE_BUFFERING -> _audioState.value = JetAudioState.Buferring(exoPlayer.currentPosition)
+            ExoPlayer.STATE_READY -> _audioState.value = JetAudioState.Ready(exoPlayer.duration)
+        }
+    }
 
+    @OptIn(DelicateCoroutinesApi::class)
+    override fun onIsPlayingChanged(isPlaying: Boolean) {
+        _audioState.value = JetAudioState.Playing(isPlaying = isPlaying)
+        _audioState.value = JetAudioState.CurrentPlaying(exoPlayer.currentMediaItemIndex)
+        if (isPlaying){
+            GlobalScope.launch(Dispatchers.IO) {
+                startProgressUpdate()
+            }
+        }else{
+            stopProgressUpdate()
+        }
+
+    }
 
      fun addMediaItem(mediaitem : MediaItem){
       exoPlayer.addMediaItem(mediaitem)
@@ -56,7 +79,7 @@ class JetAudioServiceHandler @Inject constructor(
             JetAudioEvent.Stop -> stopProgressUpdate()
             is  JetAudioEvent.UpdateProgress -> {
                 exoPlayer.seekTo(
-                    (exoPlayer.duration * jetAudioEvent.newProgress ).toLong())
+                    (exoPlayer.duration * jetAudioEvent.newProgress ))
             }
         }
     }
@@ -87,7 +110,7 @@ class JetAudioServiceHandler @Inject constructor(
     }
 
     //change the state when the audio is paused
-    private suspend fun stopProgressUpdate() = job.run {
+    private fun stopProgressUpdate() = job.run {
         job?.cancel()
         _audioState.value = JetAudioState.Playing(
             isPlaying = false

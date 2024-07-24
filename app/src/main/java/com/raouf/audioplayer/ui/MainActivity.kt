@@ -1,4 +1,4 @@
-package com.raouf.audioplayer
+package com.raouf.audioplayer.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
