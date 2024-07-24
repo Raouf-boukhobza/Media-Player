@@ -17,9 +17,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 
-private val Notification_Id = 101
-private val Notification_Channel_name = "notification channel 1"
-private val Notification_Channel_id = "notification id 1"
+private const val Notification_Id = 101
+private const val Notification_Channel_name = "notification channel 1"
+private const val Notification_Channel_id = "notification id 1"
 
 
 
@@ -32,8 +32,7 @@ class Jetaudionotificationmanager @Inject constructor(
         createnotificationchannel()
     }
 
-
-     fun Startnotificationservice(
+     fun startNotificationService(
         mediaSessionService: MediaSessionService,
         mediaSession: MediaSession
     ){
@@ -42,7 +41,7 @@ class Jetaudionotificationmanager @Inject constructor(
     }
 
     private fun forgroundsesrvicemanager(mediasessionservice : MediaSessionService){
-        var notification = Notification.Builder(context , Notification_Channel_id)
+        val notification = Notification.Builder(context , Notification_Channel_id)
             .setCategory(Notification.CATEGORY_SERVICE)
             .build()
             mediasessionservice.startForeground(Notification_Id,notification)

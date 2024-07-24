@@ -1,7 +1,5 @@
 package com.raouf.audioplayer.player.service
 
-import android.app.NotificationManager
-import android.content.ComponentName
 import android.content.Intent
 import androidx.media3.common.Player
 import androidx.media3.session.MediaSession
@@ -12,15 +10,15 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class Jetaudioplayer : MediaSessionService(){
-    @Inject
+class JetAudioPlayer : MediaSessionService(){
+   @Inject
    lateinit var mediaSession: MediaSession
 
    @Inject
    lateinit var notificationManager: Jetaudionotificationmanager
    
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        notificationManager.Startnotificationservice(
+        notificationManager.startNotificationService(
             this,
             mediaSession = mediaSession
         )

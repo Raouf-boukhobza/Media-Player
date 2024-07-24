@@ -131,7 +131,7 @@ sealed class JetAudioEvent{
     data object BackWard : JetAudioEvent()
     data object SeekTo : JetAudioEvent()
     data object Stop : JetAudioEvent()
-    data class UpdateProgress(val newProgress : Long) : JetAudioEvent()
+    data class UpdateProgress(val newProgress: Float) : JetAudioEvent()
 }
 
 
@@ -140,6 +140,6 @@ sealed class JetAudioState{
     data class Ready(val duration: Long) : JetAudioState()
     data class Buferring(val progress : Long) : JetAudioState()
     data class Progress(val progress: Long) : JetAudioState()
-    data class Playing (val isPlaying : Boolean) : JetAudioState()
+    data class Playing (var isPlaying : Boolean) : JetAudioState()
     data class CurrentPlaying(val mediaitemIndex : Int) : JetAudioState()
 }
