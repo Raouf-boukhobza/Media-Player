@@ -129,6 +129,9 @@ class AudioViewModel @Inject constructor(
                 )
             }
 
+            UiEvents.Stop -> audioServiceHandler.onPlayerEvent(
+                JetAudioEvent.Stop
+            )
         }
     }
 
