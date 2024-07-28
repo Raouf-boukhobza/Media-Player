@@ -40,7 +40,9 @@ constructor(@ApplicationContext val context: Context) {
         mCursor = context.contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             projection,
-            null,null,null
+            selectionClause,
+            selectionArg,
+            sortOrder
         )
 
         mCursor?.use { cursor ->
@@ -59,12 +61,10 @@ constructor(@ApplicationContext val context: Context) {
 
 
 
-            if (!cursor.moveToFirst()) {
-                Log.d("ContentResolverHelper", "Cursor is empty")
-            } else {
-                Log.d("ContentResolverHelper", "Cursor has data")
-            }
             cursor.apply {
+                if (count == 0 ){
+                   Log.d("Cursor " , "Cursor is empty ")
+                }
                     while (cursor.moveToNext()) {
                         val displayName = getString(displayNameColumn)
                         val id = getLong(idColumn)
@@ -81,7 +81,6 @@ constructor(@ApplicationContext val context: Context) {
                         )
                     }
             }
-            Log.d("ContentResolverHelper", "Audio list size in the  function: ${audioList.size}")
         }
         Log.d("ContentResolverHelper", "Audio list size at end of function: ${audioList.size}")
         return audioList
