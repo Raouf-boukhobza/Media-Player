@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id 'com.google.dagger.hilt.android'
+    id("kotlin-parcelize")
     id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android' version '2.51.1'
 }
 
 android {
@@ -59,6 +60,7 @@ dependencies {
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.material3
     implementation libs.androidx.media3.session
+    implementation libs.androidx.lifecycle.viewmodel.compose.android
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core
@@ -70,9 +72,6 @@ dependencies {
     //Dagger - Hilt
     implementation libs.hilt.android
     kapt libs.hilt.android.compiler
-    implementation libs.androidx.hilt.lifecycle.viewmodel
-    kapt libs.androidx.hilt.compiler
-    implementation libs.androidx.hilt.navigation.compose
 
     // viewModel Compose
     implementation libs.androidx.lifecycle.viewmodel.android
@@ -86,7 +85,13 @@ dependencies {
 
     //Glide
     implementation libs.glide
-    kapt 'com.github.bumptech.glide:compiler:4.4.0'
+    kapt libs.compiler
     implementation(libs.accompanist.z.xaccompanist.permissions.z)
+
+    // coroutine
+    implementation libs.kotlinx.coroutines.core
+    implementation libs.kotlinx.coroutines.android
+
+    implementation "androidx.activity:activity-ktx:1.9.0"
 
 }

@@ -22,6 +22,11 @@ class JetAudioServiceHandler @Inject constructor(
     val audioState : StateFlow<JetAudioState> = _audioState.asStateFlow()
 
     private var job : Job? = null
+
+
+    init {
+        exoPlayer.addListener(this)
+    }
     override fun onPlaybackStateChanged(playbackState: Int){
         when(playbackState){
             ExoPlayer.STATE_BUFFERING -> _audioState.value = JetAudioState.Buferring(exoPlayer.currentPosition)
@@ -79,7 +84,7 @@ class JetAudioServiceHandler @Inject constructor(
             JetAudioEvent.Stop -> stopProgressUpdate()
             is  JetAudioEvent.UpdateProgress -> {
                 exoPlayer.seekTo(
-                    (exoPlayer.duration * jetAudioEvent.newProgress ))
+                    ((exoPlayer.duration * jetAudioEvent.newProgress).toLong()))
             }
         }
     }

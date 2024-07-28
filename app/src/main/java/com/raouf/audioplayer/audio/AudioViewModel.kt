@@ -9,12 +9,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.SavedStateHandleSaveableApi
 import androidx.lifecycle.viewmodel.compose.saveable
+import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
 import com.raouf.audioplayer.data.local.Audio
 import com.raouf.audioplayer.data.repository.AudioRepository
 import com.raouf.audioplayer.player.JetAudioEvent
 import com.raouf.audioplayer.player.JetAudioServiceHandler
 import com.raouf.audioplayer.player.JetAudioState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -41,11 +45,11 @@ class AudioViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     var duration by savedStateHandle.saveable { mutableLongStateOf(0L) }
-    var progress by savedStateHandle.saveable { mutableFloatStateOf(0f) }
-    var progressString by savedStateHandle.saveable { mutableStateOf("00:00") }
-    var isPlaying by savedStateHandle.saveable { mutableStateOf(false) }
-    var currentSelectedAudio by savedStateHandle.saveable { mutableStateOf(initialAudio) }
-    var audioList by savedStateHandle.saveable { mutableStateOf(listOf<Audio>()) }
+    private var progress by savedStateHandle.saveable { mutableFloatStateOf(0f) }
+    private var progressString by savedStateHandle.saveable { mutableStateOf("00:00") }
+    private var isPlaying by savedStateHandle.saveable { mutableStateOf(false) }
+    private var currentSelectedAudio by savedStateHandle.saveable { mutableStateOf(initialAudio) }
+    var audioList by savedStateHandle.saveable { mutableStateOf(listOf<Audio>())}
 
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Initial)
@@ -54,6 +58,7 @@ class AudioViewModel @Inject constructor(
     init {
         loudAudioData()
     }
+
     init {
         viewModelScope.launch{
             audioServiceHandler.audioState.collectLatest {mediaState ->
@@ -76,6 +81,7 @@ class AudioViewModel @Inject constructor(
 
     private fun loudAudioData(){
         viewModelScope.launch{
+            delay(1000L)
             val audio = repository.getaudio()
             audioList = audio
             setMediaItem()
@@ -85,10 +91,10 @@ class AudioViewModel @Inject constructor(
 
     private fun setMediaItem(){
         audioList.map {audio ->
-            androidx.media3.common.MediaItem.Builder()
+            MediaItem.Builder()
                 .setUri(audio.uri)
                 .setMediaMetadata(
-                    androidx.media3.common.MediaMetadata.Builder()
+                    MediaMetadata.Builder()
                         .setArtist(audio.artist)
                         .setTitle(audio.title)
                         .setSubtitle(audio.name)
@@ -129,9 +135,7 @@ class AudioViewModel @Inject constructor(
                 )
             }
 
-            UiEvents.Stop -> audioServiceHandler.onPlayerEvent(
-                JetAudioEvent.Stop
-            )
+            UiEvents.Stop -> TODO()
         }
     }
 
@@ -149,6 +153,13 @@ class AudioViewModel @Inject constructor(
         val minute = TimeUnit.MINUTES.convert(duration , TimeUnit.MILLISECONDS)
         val second = (minute) - TimeUnit.SECONDS.convert(1, TimeUnit.MINUTES)
         return String.format("%02d:%02d" , minute,second)
+    }
+
+    override fun onCleared() {
+        viewModelScope.launch {
+            audioServiceHandler.onPlayerEvent(JetAudioEvent.Stop)
+        }
+        super.onCleared()
     }
 
 }

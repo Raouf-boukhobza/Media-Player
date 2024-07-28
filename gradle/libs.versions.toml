@@ -9,6 +9,8 @@ coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+kotlinxCoroutinesAndroid = "1.8.1"
+kotlinxCoroutinesCore = "1.5.0"
 legacySupportV4 = "1.0.0"
 lifecycleRuntimeKtx = "2.8.3"
 activityCompose = "1.9.0"
@@ -16,6 +18,7 @@ composeBom = "2024.06.00"
 media3DatasourceOkhttp = "1.1.0"
 media3Session = "1.1.0"
 xglide_zVersion = " 4.15.1"
+lifecycleViewmodelComposeAndroid = "2.8.4"
 
 [libraries]
 accompanist_z-xaccompanist-permissions_z = { module = "com.google.accompanist : accompanist-permissions ", version = "0.30.0" }
@@ -28,6 +31,7 @@ androidx-lifecycle-viewmodel-android = { module = "androidx.lifecycle:lifecycle-
 androidx-media3-datasource-okhttp = { module = "androidx.media3:media3-datasource-okhttp", version.ref = "media3DatasourceOkhttp" }
 androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "media3DatasourceOkhttp" }
 androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "media3DatasourceOkhttp" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide_z-xglide_z = { module = "com.github.bumptech.glide : glide ", version.ref = "xglide_zVersion" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
@@ -46,6 +50,9 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-media3-session = { group = "androidx.media3", name = "media3-session", version.ref = "media3Session" }
+androidx-lifecycle-viewmodel-compose-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose-android", version.ref = "lifecycleViewmodelComposeAndroid" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
