@@ -4,14 +4,11 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-07-27T23:41:10.754048Z">
+        <DropdownSelection timestamp="2024-07-29T13:08:27.369668800Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="FirebaseDirectAccess" identifier="reservation=projects/audio-player-926ba/deviceSessions/session-15tks5mnzdytt" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\HMinfo\.android\avd\Pixel_6_API_28_2.avd" />
             </handle>
-            <template>
-              <DeviceId pluginId="FirebaseDirectAccess" type="TEMPLATE" identifier="model_id=b0q/33" />
-            </template>
           </Target>
         </DropdownSelection>
         <DialogSelection>
